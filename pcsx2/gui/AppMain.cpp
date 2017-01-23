@@ -36,6 +36,9 @@
 
 #include <wx/stdpaths.h>
 
+#include "TAS/MovieControle.h"//--TAS--//
+#include "TAS/KeyMovie.h"//--TAS--//
+
 #ifdef __WXMSW__
 #	include <wx/msw/wrapwin.h>		// needed to implement the app!
 #endif
@@ -608,6 +611,20 @@ void Pcsx2App::HandleEvent(wxEvtHandler* handler, wxEventFunction func, wxEvent&
 void Pcsx2App::HandleEvent(wxEvtHandler* handler, wxEventFunction func, wxEvent& event)
 {
 	try {
+		//--TAS--//
+		if (g_MovieControle.isStop()) {
+			//ストップ中はGSFrameのキーイベントも停止するのでここからキー入力を取得
+			//それに伴ってGSFrameで設定してあるショートカットキーも使えない
+			if (PADkeyEvent != NULL) {
+				// キー情報を取得、多分1frameに1回だけ呼び出す系
+				const keyEvent* ev = PADkeyEvent();
+				if (ev != NULL) {
+					sApp.TAS_PadKeyDispatch(*ev);
+				}
+			}
+		}
+		g_MovieControle.StartCheck();
+		//-------//
 		(handler->*func)(event);
 	}
 	// ----------------------------------------------------------------------------
@@ -1030,6 +1047,8 @@ void Pcsx2App::OnProgramLogClosed( wxWindowID id )
 
 void Pcsx2App::OnMainFrameClosed( wxWindowID id )
 {
+	g_KeyMovie.Stop();//--TAS--//
+
 	// Nothing threaded depends on the mainframe (yet) -- it all passes through the main wxApp
 	// message handler.  But that might change in the future.
 	if( m_id_MainFrame != id ) return;

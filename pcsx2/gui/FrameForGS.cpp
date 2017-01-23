@@ -80,6 +80,34 @@ void GSPanel::InitDefaultAccelerators()
 	m_Accels->Map( AAC( WXK_F12 ),				"Sys_RecordingToggle" );
 
 	m_Accels->Map( FULLSCREEN_TOGGLE_ACCELERATOR_GSPANEL,		"FullscreenToggle" );
+
+	//--TAS--//
+	m_Accels->Map(AAC(WXK_SPACE), "FrameAdvance");
+	m_Accels->Map(AAC(wxKeyCode('p')), "TogglePause");
+	m_Accels->Map(AAC(wxKeyCode('r')), "KeyMovieModeToggle");
+	// 使わないコマンドを設定
+	// WXK_NONE is error
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot0");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot1");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot2");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot3");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot4");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot5");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot6");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot7");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot8");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_SaveSlot9");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot0");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot1");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot2");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot3");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot4");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot5");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot6");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot7");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot8");
+	m_Accels->Map(AAC(WXK_COMMAND), "States_LoadSlot9");
+	//-------//
 }
 
 GSPanel::GSPanel( wxWindow* parent )
@@ -644,6 +672,7 @@ void GSFrame::OnUpdateTitle( wxTimerEvent& evt )
 	wxString omodei = (smode2 & 1) ? templates.OutputInterlaced : templates.OutputProgressive;
 
 	wxString title = templates.TitleTemplate;
+	title.Replace(L"${frame}", pxsFmt(L"%d", g_FrameCount));	//--TAS--//
 	title.Replace(L"${slot}",		pxsFmt(L"%d", States_GetCurrentSlot()));
 	title.Replace(L"${limiter}",	limiterStr);
 	title.Replace(L"${speed}",		pxsFmt(L"%3d%%", lround(percentage)));

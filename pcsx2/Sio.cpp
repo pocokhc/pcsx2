@@ -19,6 +19,8 @@
 #include "Sio.h"
 #include "sio_internal.h"
 
+#include "TAS/KeyMovie.h"	//--TAS--//
+
 _sio sio;
 _mcd mcds[2][4];
 _mcd *mcd;
@@ -199,6 +201,7 @@ SIO_WRITE sioWriteController(u8 data)
 
 	default:
 		sio.buf[sio.bufCount] = PADpoll(data);
+		g_KeyMovie.ControllerInterrupt(data, sio.port, sio.bufCount, sio.buf);//--TAS--//
 		break;
 	}
 	//Console.WriteLn( "SIO: sent = %02X  From pad data =  %02X  bufCnt %08X ", data, sio.buf[sio.bufCount], sio.bufCount);

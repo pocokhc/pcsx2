@@ -111,6 +111,7 @@ protected:
 	wxMenu&			m_menuConfig;
 	wxMenu&			m_menuMisc;
 	wxMenu&			m_menuDebug;
+	wxMenu&			m_menuMovieDlg;	//--TAS--//
 
 	wxMenu&			m_LoadStatesSubmenu;
 	wxMenu&			m_SaveStatesSubmenu;
@@ -201,6 +202,15 @@ protected:
 	void Menu_ChangeLang(wxCommandEvent &event);
 	void Menu_ShowConsole_Stdio(wxCommandEvent &event);
 	void Menu_ShowAboutBox(wxCommandEvent &event);
+	
+	//--TAS--//
+	void Menu_KeyMovie_Record(wxCommandEvent &event);
+	void Menu_KeyMovie_Stop(wxCommandEvent &event);
+	void Menu_KeyMovie_Play(wxCommandEvent &event);
+	void Menu_KeyMovie_ConvertP2M(wxCommandEvent &event);
+	void Menu_KeyMovie_ConvertOld(wxCommandEvent &event);
+	void Menu_KeyMovie_OpenKeyEditor(wxCommandEvent &event);
+	//-------//
 
 	void _DoBootCdvd();
 	bool _DoSelectIsoBrowser( wxString& dest );

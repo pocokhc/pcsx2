@@ -235,7 +235,9 @@ SaveStateBase& SaveStateBase::FreezeInternals()
 
 	if( IsLoading() )
 		PostLoadPrep();
-		
+	
+	keymovieFreeze();	//--TAS--//
+
 	return *this;
 }
 

@@ -31,6 +31,10 @@
 
 #include "Sio.h"
 
+#include "TAS/MovieControle.h" //--TAS--//
+#include "TAS/KeyEditor.h" //--TAS/KeyEditor--//
+#include "app.h"//--TAS/KeyEditor--//
+
 using namespace Threading;
 
 extern u8 psxhblankgate;
@@ -554,6 +558,13 @@ __fi void rcntUpdate_vSync()
 
 	if (vsyncCounter.Mode == MODE_VSYNC)
 	{
+		//--TAS KeyEditor--//
+		KeyEditor* dlg = wxGetApp().GetKeyEditorPtr();
+		if (dlg)dlg->FrameUpdate();
+		//-----------------//
+
+		g_MovieControle.StopCheck();//--TAS--//
+
 		VSyncEnd(vsyncCounter.sCycle);
 		
 		vsyncCounter.sCycle += vSyncInfo.Blank;
