@@ -623,7 +623,8 @@ static const GlobalCommandDescriptor CommandDeclarations[] =
 	{	"GSwindow_OffsetReset" , Implementations::GSwindow_OffsetReset , NULL, NULL, false},
 
 	{	"Sys_SuspendResume",
-		Implementations::Sys_SuspendResume,
+//		Implementations::Sys_SuspendResume,
+		Implementations::Sys_Suspend,//--TAS--// //Resume‚ð•Ê“rŽÀ‘•‚µ‚Ä‚¢‚é‚Ì‚Å‹““®‚ª‚¨‚©‚µ‚­‚È‚é‚½‚ßSuspend‚É‚à‚Ç‚·(1.4.0‚Å‚Ísuspend)
 		NULL,
 		NULL,
 		false,
